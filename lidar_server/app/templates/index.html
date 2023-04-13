@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
+    
+    <title>Lidar</title>
+
+    <script>
+        const image_path = async () => {
+            let resp = await fetch('/app/run_script');
+            let json = await resp.json();
+            return json;
+        }
+
+        const load_image = async () => {
+            const img_container = document.getElementById('lidar_img');
+            const path = await image_path();
+            const img = document.createElement('img');
+            const img_svg = document.createElement('img');
+            img.src = path['path'];
+            img_container.appendChild(img);
+
+            img_svg.src = path['svg_path'];
+            img_container.appendChild(img_svg);
+        }
+    </script>
+    <style>
+        .p1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20pt;
+            color: red;
+        }
+        .p2 {
+            font-family: 'Lobster', cursive;
+            font-style: bold;
+            color: pink;
+            font-size: 36pt;
+        }
+    </style>
+</head>
+<body>
+    <h1>Здесь мог быть крутой дизайн</h1>
+    <p class="p1">Но я поигрался со шрифтами</p>
+    <p class="p2">И проиграл</p>
+    <button onclick="load_image()">Загрузить данные</button>
+    <div id="lidar_img"></div>
+</body>
+</html>
